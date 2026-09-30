@@ -24,6 +24,5 @@ class Attack{
     update(){
         if(this.d)this.x+=this.speed;
         else this.x-=this.speed;
-        if(this.x<100||this.x>400)this.d = !this.d
     }
 }

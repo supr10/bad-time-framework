@@ -16,7 +16,7 @@ function drawLife(){
     rect(150, 430, life*2, 30);
     text(life.toString()+"/100", 130, 430);
     if(karma>0){
-        fill("#ac00ff");
+        fill("#b540ff");
         rect((150+life*2)-karma*2, 430, karma*2, 30);
     }
 }
