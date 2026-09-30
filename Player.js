@@ -1,10 +1,9 @@
 class Player{
-    constructor(x, y, life){
+    constructor(x, y){
         this.x = x;
         this.y = y;
         this.ix = x;
         this.iy = y;
-        this.life = life;
     }
     resetPos(){
         this.x = this.ix;
@@ -22,8 +21,7 @@ class Player{
             this.y+=y;
         }
     }
-    displayLife(){
-        fill("#FFFFFF");
-        text(this.life.toString(), 250, 450)
+    isMoving(){
+        return keyIsDown(UP_ARROW)||keyIsDown(DOWN_ARROW)||keyIsDown(LEFT_ARROW)||keyIsDown(RIGHT_ARROW);
     }
 }
