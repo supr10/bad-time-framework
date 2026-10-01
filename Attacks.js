@@ -25,4 +25,34 @@ class Attack{
         if(this.d)this.x+=this.speed;
         else this.x-=this.speed;
     }
+    shouldErase(){
+        return this.x<110&&this.d===0||this.x>390&&this.d===1
+    }
+}
+
+class staticAttack{
+    constructor(x, y, w, h, wt){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.spawnFrame = frameCount;   //frame where the object was created
+        this.warnTime = wt;             //time before the object starts inflicting damage
+    }
+    update(){
+
+    }
+    draw(){
+        if(frameCount-this.spawnFrame<=this.warnTime){
+            fill("#680000");
+        }else{
+            fill("#ffffff")
+        }rect(this.x, this.y, this.w, this.h);
+    }
+    isColliding(plyr){
+        return (plyr.x+12.5>this.x)&&(plyr.x-12.5<this.x+this.w)&&(plyr.y+12.5>this.y)&&(plyr.y-12.5<this.y+this.h)&&frameCount-this.spawnFrame>this.warnTime
+    }
+    shouldErase(){
+        return frameCount-this.spawnFrame>this.warnTime*2
+    }
 }
