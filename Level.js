@@ -1,6 +1,8 @@
 let life = 100;
 let karma = 0;
 let alive = true;
+let paused = false;
+
 
 function drawLevel(){
     fill("#FFFFFF");
@@ -18,5 +20,17 @@ function drawLife(){
     if(karma>0){
         fill("#b540ff");
         rect((150+life*2)-karma*2, 430, karma*2, 30);
+    }
+}
+
+function togglePause(){
+    paused = !paused;
+}
+
+function getLevel(){
+    level = []
+    let level2 = prompt("level list:").replace("[", "").replace("]", "").split(",");
+    for (let i = 0; i < level2.length; i++){
+        level.push(Number(level2[i]));
     }
 }

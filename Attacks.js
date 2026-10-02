@@ -19,7 +19,12 @@ class Attack{
     }
     isColliding(plyr){
         //I'm a bad coder, so I just assume the hitbox was a rectangle
-        return (plyr.x+12.5>this.x)&&(plyr.x-12.5<this.x+this.width)&&(plyr.y+12.5>this.y)&&(plyr.y-12.5<this.y+this.height)
+        if(this.m===0){
+            return (plyr.x+12.5>this.x)&&(plyr.x-12.5<this.x+this.width)&&(plyr.y+12.5>this.y)&&(plyr.y-12.5<this.y+this.height);
+        }else{
+            return (plyr.x+12.5>this.x)&&(plyr.x-12.5<this.x+this.width)&&(plyr.y+12.5>this.y)&&(plyr.y-12.5<this.y+this.height)&&plyr.isMoving();
+        }
+
     }
     update(){
         if(this.d)this.x+=this.speed;
