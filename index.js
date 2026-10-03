@@ -53,7 +53,7 @@ function generateAttacks(id){
     }else if(id===11){
         atkList.push(new staticAttack(100, 300, 300, 100, 60*difmult))
     }else if(id===12){
-        let wantedY = rdm(100, 200);
+        let wantedY = 150
         for(let i = 0;i<20;i++){
             wantedY+=rdm(-10, 10);
             atkList.push(new Attack(450+20*i, 100, 10, wantedY, 5, 0));
@@ -94,9 +94,12 @@ function updateLife(){
         if(atkList[i].isColliding(player))karma = min(karma+1, life);
     }
 
-    if(frameCount%60===0&&karma>0){
-        life--;
+    if(frameCount%60===0&&karma>10) {
+        life -= 2;
+        karma -= 2;
+    }else if(frameCount%60&&karma>0){
         karma--;
+        life--;
     }if(life<=0||karma===life){
         alive = false;
     }
@@ -139,8 +142,10 @@ function draw(){
             updateLife();
             fill("#ffffff");
             text("paused", 100, 100);
+            document.getElementById("foodButton").style.display = "block";
         }else{
             update();
+            document.getElementById("foodButton").style.display = "none";
         }
         player.draw();
 
@@ -159,14 +164,7 @@ function reset(){
     for(let i = 0;i<atkList.length;i++){
         delete atkList[i];
     }
-    atkList = []
-    attackIndex = 0;
-    player.x = 250;
-    player.y = 250;
-    life = 100;
-    karma = 0;
-    alive = true;
-    paused = true;
+    resetCharacter();
 }
 
 function play(){
@@ -174,6 +172,20 @@ function play(){
         console.log(j);
         delete atkList[j];
     }
+    resetCharacter();
+}
+
+function rdm(min, max) { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function heal(){
+    if(alive&&paused){
+        life = min(life+50, 100)
+    }
+}
+
+function resetCharacter(){
     atkList = []
     attackIndex = 0;
     player.x = 250;
@@ -182,8 +194,5 @@ function play(){
     karma = 0;
     alive = true;
     paused = true;
-}
-
-function rdm(min, max) { // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    win = false;
 }
