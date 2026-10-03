@@ -97,7 +97,7 @@ function updateLife(){
     if(frameCount%60===0&&karma>10) {
         life -= 2;
         karma -= 2;
-    }else if(frameCount%60&&karma>0){
+    }else if(frameCount%60===0&&karma>0){
         karma--;
         life--;
     }if(life<=0||karma===life){
